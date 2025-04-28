@@ -1,41 +1,80 @@
-Training Started...
+Model Summary:
 
-Model: "model"
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-word_embedding (InputLayer)  [(None, 100)]             0         
-_________________________________________________________________
-char_embedding (InputLayer)  [(None, 24)]              0         
-_________________________________________________________________
-stats_features (InputLayer)  [(None, 4)]               0         
-_________________________________________________________________
-dense_27 (Dense)             (None, 128)              12928     
-_________________________________________________________________
-dense_28 (Dense)             (None, 128)              3200      
-_________________________________________________________________
-dense_29 (Dense)             (None, 128)              640       
-_________________________________________________________________
-lambda_3 (Lambda)            (None, 3, 128)           0         
-_________________________________________________________________
-attention_fusion (Lambda)    (None, 128)              0         
-_________________________________________________________________
-dense_31 (Dense)             (None, 64)               8256      
-_________________________________________________________________
-dropout_3 (Dropout)         (None, 64)               0         
-_________________________________________________________________
-dense_32 (Dense)             (None, 2)                130       
-=================================================================
-Total params: 25,154
-Trainable params: 25,154
-Non-trainable params: 0
-Training started...
+| Layer (type)         | Output Shape     | Param #  | Connected to          |
+|----------------------|------------------|----------|-----------------------|
+| word_embedding       | (None, 50)       | 0        | -                     |
+| (InputLayer)         |                  |          |                       |
+|----------------------|------------------|----------|-----------------------|
+| char_embedding       | (None, 30)       | 0        | -                     |
+| (InputLayer)         |                  |          |                       |
+|----------------------|------------------|----------|-----------------------|
+| stats_features       | (None, 10)       | 0        | -                     |
+| (InputLayer)         |                  |          |                       |
+|----------------------|------------------|----------|-----------------------|
+| dense_177 (Dense)    | (None, 128)      | 6,528    | word_embedding[0][0]  |
+|----------------------|------------------|----------|-----------------------|
+| dense_178 (Dense)    | (None, 128)      | 3,968    | char_embedding[0][0]  |
+|----------------------|------------------|----------|-----------------------|
+| dense_179 (Dense)    | (None, 128)      | 1,408    | stats_features[0][0]  |
+|----------------------|------------------|----------|-----------------------|
+| lambda_27 (Lambda)   | (None, 3, 128)   | 0        | dense_177[0][0],      |
+|                      |                  |          | dense_178[0][0],      |
+|                      |                  |          | dense_179[0][0]       |
+|----------------------|------------------|----------|-----------------------|
+| attention_fusion     | (None, 128)      | 0        | lambda_27[0][0]       |
+| (Lambda)             |                  |          |                       |
+|----------------------|------------------|----------|-----------------------|
+| dense_181 (Dense)    | (None, 64)       | 8,256    | attention_fusion[0][0]|
+|----------------------|------------------|----------|-----------------------|
+| dropout_27           | (None, 64)       | 0        | dense_181[0][0]       |
+| (Dropout)            |                  |          |                       |
+|----------------------|------------------|----------|-----------------------|
+| dense_182 (Dense)    | (None, 2)        | 130      | dropout_27[0][0]      |
+|----------------------|------------------|----------|-----------------------|
 
-Epoch 1/100, Validation Accuracy: 0.85
-Epoch 2/100, Validation Accuracy: 0.87
-...
-Test Accuracy: 0.88
+**Total params**: 20,290 (79.26 KB)  
+**Trainable params**: 20,290 (79.26 KB)  
+**Non-trainable params**: 0 (0.00 B)
 
-Best Epoch: 2
-Best Validation Accuracy: 0.87
-Training completed.
+---
+
+**Training Log:**
+
+- **Epoch 1/100**  
+  22/22 ━━━━━━━━━━━━━━━━━━━━ 3s 20ms/step - accuracy: 0.5058 - loss: 0.5451 - val_accuracy: 0.8933 - val_loss: 0.3566
+
+- **Epoch 2/100**  
+  22/22 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.9660 - loss: 0.2936 - val_accuracy: 1.0000 - val_loss: 0.0843
+
+- **Epoch 3/100**  
+  22/22 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 1.0000 - loss: 0.0614 - val_accuracy: 1.0000 - val_loss: 0.0087
+
+- **Epoch 4/100**  
+  22/22 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 1.0000 - loss: 0.0084 - val_accuracy: 1.0000 - val_loss: 0.0024
+
+... *(continue logging epochs)*
+
+- **Epoch 100/100**  
+  22/22 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 1.0000 - loss: 4.4438e-06 - val_accuracy: 1.0000 - val_loss: 8.9010e-08
+
+---
+
+**Validation Accuracy Over Epochs:**
+
+Epoch 1: Validation Accuracy = 0.8933  
+Epoch 2: Validation Accuracy = 1.0000  
+Epoch 3: Validation Accuracy = 1.0000  
+Epoch 4: Validation Accuracy = 1.0000  
+... *(continue recording epochs)*
+
+Test Accuracy: 1.0000
+
+Best Epoch: 2  
+Best Validation Accuracy: 1.0000
+
+Hyperparameters:  
+Epochs = 100  
+Batch Size = 32  
+Projection Dim = 128  
+Hidden Dim = 64  
+Dropout = 0.2
