@@ -1,14 +1,14 @@
 from IPython import get_ipython
 from IPython.display import display
 import tensorflow as tf
-from tensorflow.keras.layers import Input, Dense, Dropout, Concatenate, Lambda  # Import Lambda here
+from tensorflow.keras.layers import Input, Dense, Dropout, Concatenate, Lambda  
 from tensorflow.keras.models import Model
 from sklearn.model_selection import train_test_split
 import numpy as np
 
 
 
-# these dimensions of each file
+# Dimensions of each file
 D_word = 100     # Original word embedding dimension
 D_char = 24      # Original character embedding dimension
 D_stats = 4      # Dimension for statistical features
@@ -25,17 +25,17 @@ proj_word  = Dense(D_proj, activation='relu')(input_word)
 proj_char  = Dense(D_proj, activation='relu')(input_char)
 proj_stats = Dense(D_proj, activation='relu')(input_stats)
 
-# Stack the projections: shape (batch_size, 3, D_proj)
+# Stacking the projections: shape (batch_size, 3, D_proj)
 stacked_modalities = Lambda(lambda x: tf.stack(x, axis=1))([proj_word, proj_char, proj_stats])
 
 
 # Attention Fusion Layer (inline implementation)
-# Define the Dense layer outside the attention_fusion function
-attn_score_layer = Dense(1, activation='relu')  # Create the Dense layer here
+# Defining the Dense layer outside the attention_fusion function
+attn_score_layer = Dense(1, activation='relu')  
 
 def attention_fusion(x):
     # x is shape (batch, 3, D_proj)
-    attn_scores = attn_score_layer(x)      # Use the pre-defined Dense layer
+    attn_scores = attn_score_layer(x)      
     attn_scores = tf.squeeze(attn_scores, axis=-1)       # shape (batch, 3)
     attn_weights = tf.nn.softmax(attn_scores, axis=1)     # shape (batch, 3)
     attn_weights = tf.expand_dims(attn_weights, axis=-1)   # shape (batch, 3, 1)
@@ -50,32 +50,32 @@ fusion_hidden = Dense(64, activation='relu')(fusion_representation)
 fusion_hidden = Dropout(0.2)(fusion_hidden)
 output = Dense(n_class, activation='softmax')(fusion_hidden)
 
-# Build the model
+# Building the model
 model = Model(
     inputs=[input_word, input_char, input_stats],
     outputs=output,
     name="Attention_Fusion_Classifier"
 )
 
-# Compile the model
+# Compiling the model
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-# Print model summary
+# Printing model summary
 model.summary()
 
 data = pd.read_csv('/content/sampledata.csv')
 
 
-# Split data into training and testing sets (70:30)
+# Spliting data into training and testing sets (70:30)
 X_word_train, X_word_test, X_char_train, X_char_test, X_stat_train, X_stat_test, y_train, y_test = train_test_split(
     word_data, char_data, stat_data, labels, test_size=0.3, random_state=42
 )
 
 # Hyperparameters
-epochs = 100  # Train for 100 epochs
+epochs = 100  
 batch_size = 32
 
-# Train the model
+# Training the model
 history = model.fit(
     [X_word_train, X_char_train, X_stat_train],
     y_train,
@@ -85,20 +85,20 @@ history = model.fit(
     verbose=1
 )
 
-# Print validation accuracy every 10 epochs
+# Printing validation accuracy every 10 epochs
 print("\nValidation Accuracy Over Epochs:")
 for epoch in range(0, epochs, 10):
     print(f"Epoch {epoch + 1}: Validation Accuracy = {history.history['val_accuracy'][epoch]:.4f}")
 
-# Evaluate the model on the test set
+# Evaluating the model on the test set
 test_loss, test_accuracy = model.evaluate([X_word_test, X_char_test, X_stat_test], y_test, verbose=0)
 print(f"\nTest Accuracy: {test_accuracy:.4f}")
 
-# Find the best epoch and corresponding accuracy
+# Finding the best epoch and corresponding accuracy
 best_epoch = np.argmax(history.history['val_accuracy']) + 1
 best_accuracy = history.history['val_accuracy'][best_epoch - 1]
 
-# Print the best result
+# Printing the best result
 print(f"\nBest Epoch: {best_epoch}")
 print(f"Best Validation Accuracy: {best_accuracy:.4f}")
 print(f"Hyperparameters: Epochs={epochs}, Batch Size={batch_size}, Projection Dim={D_proj}, Hidden Dim=64, Dropout=0.2")
