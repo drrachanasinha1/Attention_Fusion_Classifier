@@ -46,8 +46,8 @@ pip install tensorflow scikit-learn numpy ipython
 Clone this repository:
 
 ```
-git clone https://github.com/yourusername/attention-fusion-classifier.git
-cd attention-fusion-classifier
+git clone https://github.com/yourusername/Attention-fusion-classifier.git
+cd Attention-fusion-classifier
 ```
 
 Run the script:
