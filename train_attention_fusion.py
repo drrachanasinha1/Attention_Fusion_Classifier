@@ -1,6 +1,5 @@
 from IPython import get_ipython
 from IPython.display import display
-
 import tensorflow as tf
 from tensorflow.keras.layers import Input, Dense, Dropout, Concatenate, Lambda  # Import Lambda here
 from tensorflow.keras.models import Model
@@ -31,9 +30,12 @@ stacked_modalities = Lambda(lambda x: tf.stack(x, axis=1))([proj_word, proj_char
 
 
 # Attention Fusion Layer (inline implementation)
+# Define the Dense layer outside the attention_fusion function
+attn_score_layer = Dense(1, activation='relu')  # Create the Dense layer here
+
 def attention_fusion(x):
     # x is shape (batch, 3, D_proj)
-    attn_scores = Dense(1, activation='relu')(x)       # shape (batch, 3, 1)
+    attn_scores = attn_score_layer(x)      # Use the pre-defined Dense layer
     attn_scores = tf.squeeze(attn_scores, axis=-1)       # shape (batch, 3)
     attn_weights = tf.nn.softmax(attn_scores, axis=1)     # shape (batch, 3)
     attn_weights = tf.expand_dims(attn_weights, axis=-1)   # shape (batch, 3, 1)
