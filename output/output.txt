@@ -1,7 +1,7 @@
 # Model Summary
 
-| Layer (type)               | Output Shape      | Param # | Connected to                 |
-| :-------------------------- | :---------------- | :------ | :---------------------------- |
+| Layer (type)                |Output Shape        | Param # | Connected to                  |
+| :-------------------------- | :----------------  | :------ | :-----------------------------|
 | word_embedding              | (None, 100)        | 0       | -                             |
 | (InputLayer)                |                    |         |                               |
 | char_embedding              | (None, 24)         | 0       | -                             |
@@ -46,8 +46,8 @@ Non-trainable params: 0 (0.00 B)
 
 # Validation Accuracy Over Epochs
 
-| Epoch | Validation Accuracy |
-| :---- | :------------------ |
+| Epoch | Validation Accuracy  |
+| :---- | :------------------  |
 | 1     | 0.9967               |
 | 11    | 1.0000               |
 | 21    | 1.0000               |
