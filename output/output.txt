@@ -1,79 +1,80 @@
 # Model Summary
 
-| Layer (type)         | Output Shape      | Param #  | Connected to         |
-| :------------------- | :---------------- | :------- | :------------------- |
-| word_embedding        | (None, 100)        | 0        | -                     |
-| (InputLayer)          |                    |          |                       |
-| char_embedding        | (None, 24)         | 0        | -                     |
-| (InputLayer)          |                    |          |                       |
-| stats_features        | (None, 4)          | 0        | -                     |
-| (InputLayer)          |                    |          |                       |
-| dense_213 (Dense)      | (None, 128)        | 12,928   | word_embedding[0][0]  |
-| dense_214 (Dense)      | (None, 128)        | 3,200    | char_embedding[0][0]  |
-| dense_215 (Dense)      | (None, 128)        | 640      | stats_features[0][0]  |
-| lambda_33 (Lambda)     | (None, 3, 128)     | 0        | dense_213, dense_214, dense_215 |
-| attention_fusion (Lambda) | (None, 128)    | 0        | lambda_33[0][0]       |
-| dense_217 (Dense)      | (None, 64)         | 8,256    | attention_fusion[0][0]|
-| dropout_33 (Dropout)   | (None, 64)         | 0        | dense_217[0][0]       |
-| dense_218 (Dense)      | (None, 2)          | 130      | dropout_33[0][0]      |
+| Layer (type)               | Output Shape      | Param # | Connected to                 |
+| :-------------------------- | :---------------- | :------ | :---------------------------- |
+| word_embedding              | (None, 100)        | 0       | -                             |
+| (InputLayer)                |                    |         |                               |
+| char_embedding              | (None, 24)         | 0       | -                             |
+| (InputLayer)                |                    |         |                               |
+| stats_features              | (None, 4)          | 0       | -                             |
+| (InputLayer)                |                    |         |                               |
+| dense_213 (Dense)           | (None, 128)        | 12,928  | word_embedding[0][0]          |
+| dense_214 (Dense)           | (None, 128)        | 3,200   | char_embedding[0][0]          |
+| dense_215 (Dense)           | (None, 128)        | 640     | stats_features[0][0]          |
+| lambda_33 (Lambda)          | (None, 3, 128)     | 0       | dense_213, dense_214, dense_215 |
+| attention_fusion (Lambda)   | (None, 128)        | 0       | lambda_33[0][0]               |
+| dense_217 (Dense)           | (None, 64)         | 8,256   | attention_fusion[0][0]        |
+| dropout_33 (Dropout)        | (None, 64)         | 0       | dense_217[0][0]               |
+| dense_218 (Dense)           | (None, 2)          | 130     | dropout_33[0][0]              |
 
-**Total params**: 25,154 (98.26 KB)  
-**Trainable params**: 25,154 (98.26 KB)  
-**Non-trainable params**: 0 (0.00 B)
+Total params: 25,154 (98.26 KB)
+Trainable params: 25,154 (98.26 KB)
+Non-trainable params: 0 (0.00 B)
+
 ---
 
-**Training Log:**
+# Training Log:
 
-- **Epoch 1/100**  
+- Epoch 1/100
   22/22 ━━━━━━━━━━━━━━━━━━━━ 3s 20ms/step - accuracy: 0.5058 - loss: 0.5451 - val_accuracy: 0.8933 - val_loss: 0.3566
 
-- **Epoch 2/100**  
+- Epoch 2/100
   22/22 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 0.9660 - loss: 0.2936 - val_accuracy: 1.0000 - val_loss: 0.0843
 
-- **Epoch 3/100**  
+- Epoch 3/100
   22/22 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 1.0000 - loss: 0.0614 - val_accuracy: 1.0000 - val_loss: 0.0087
 
-- **Epoch 4/100**  
+- Epoch 4/100
   22/22 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 1.0000 - loss: 0.0084 - val_accuracy: 1.0000 - val_loss: 0.0024
 
-... *(continue logging epochs)*
+... (continue logging epochs)
 
-- **Epoch 100/100**  
+- Epoch 100/100
   22/22 ━━━━━━━━━━━━━━━━━━━━ 0s 8ms/step - accuracy: 1.0000 - loss: 4.4438e-06 - val_accuracy: 1.0000 - val_loss: 8.9010e-08
 
 ---
 
 # Validation Accuracy Over Epochs
 
-| Epoch  | Validation Accuracy |
-| :----- | :------------------ |
-| 1      | 0.9967               |
-| 11     | 1.0000               |
-| 21     | 1.0000               |
-| 31     | 1.0000               |
-| 41     | 1.0000               |
-| 51     | 1.0000               |
-| 61     | 1.0000               |
-| 71     | 1.0000               |
-| 81     | 1.0000               |
-| 91     | 1.0000               |
+| Epoch | Validation Accuracy |
+| :---- | :------------------ |
+| 1     | 0.9967               |
+| 11    | 1.0000               |
+| 21    | 1.0000               |
+| 31    | 1.0000               |
+| 41    | 1.0000               |
+| 51    | 1.0000               |
+| 61    | 1.0000               |
+| 71    | 1.0000               |
+| 81    | 1.0000               |
+| 91    | 1.0000               |
 
 ---
 
 # Test Accuracy
-- **Test Accuracy**: `1.0000`
+Test Accuracy: 1.0000
 
 ---
 
 # Best Performance
-- **Best Epoch**: `2`
-- **Best Validation Accuracy**: `1.0000`
+Best Epoch: 2
+Best Validation Accuracy: 1.0000
 
 ---
 
 # Hyperparameters
-- **Epochs**: `100`
-- **Batch Size**: `32`
-- **Projection Dim**: `128`
-- **Hidden Dim**: `64`
-- **Dropout**: `0.2`
+Epochs: 100
+Batch Size: 32
+Projection Dim: 128
+Hidden Dim: 64
+Dropout: 0.2
