@@ -89,7 +89,7 @@ Hyperparameters: Epochs=100, Batch Size=32, Projection Dim=128, Hidden Dim=64, D
 ## Project Structure
 
 ```
-attention-fusion-classifier/
+Attention-fusion-classifier/
 ├── output
 ├── README.md
 ├── train_attention_fusion.py
