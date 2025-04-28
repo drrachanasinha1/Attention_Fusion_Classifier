@@ -1,32 +1,31 @@
 # Attention Fusion Classifier
 
-A deep learning model that **fuses multi-modal features** (word embeddings, character embeddings, and statistical features) using a **custom attention mechanism** for classification tasks.  
-It demonstrates how to integrate multiple input types and use an attention-based fusion layer to achieve better performance.
+A deep learning model that **combines multi-modal features** (word embeddings, character embeddings, and statistical features) based on a **custom attention mechanism** for classification.
 
+It showcases how to fuse different input types and apply an attention-based fusion layer to yield improved performance.
 
 ## Features
 
-- Supports **three input modalities**: Word Embeddings, Character Embeddings, and Statistical Features.
-- **Attention Fusion Layer** to learn the importance of each modality dynamically.
-- **Validation tracking** and **best epoch selection**.
-- **Lightweight**, easy-to-train model.
+- It accomodates three input modalities: Word Embeddings, Character Embeddings, and Statistical Features.
+- Attention Fusion Layer to learn the weightage of every modality dynamically.
+- Validation tracking and best epoch selection.
+- Light, easy-to-train model.
 
 ## Model Architecture
 
 ```
 Input Layers
-   ├── Word Embeddings → Dense → Projected Word Features
-   ├── Char Embeddings → Dense → Projected Char Features
-   └── Stats Features → Dense → Projected Stats Features
+├── Word Embeddings → Dense → Projected Word Features
+├── Char Embeddings → Dense → Projected Char Features
+└── Stats Features → Dense → Projected Stats Features
 
 Stack Modalities → Apply Attention Fusion → Fused Representation
 Fused Representation → Dense → Dropout → Dense → Output
 ```
 
-- **Attention Fusion Layer**:
-  - Computes attention weights over the modalities.
-  - Applies a weighted sum to generate a fused representation.
-
+- **Attention Fusion Layer:**
+- Calculates attention weights across modalities.
+- Performs a weighted sum to create a fused representation.
 
 ## Dependencies
 
@@ -36,44 +35,43 @@ Fused Representation → Dense → Dropout → Dense → Output
 - NumPy
 - IPython (optional, for display)
 
-Install them via:
+Install them by:
 
 ```bash
 pip install tensorflow scikit-learn numpy ipython
 ```
 
 ## How to Run
-Clone this repository:
+Clone the repository:
 
-```
+```bash
 git clone https://github.com/yourusername/Attention-fusion-classifier.git
 cd Attention-fusion-classifier
 ```
 
 Run the script:
-```
+```python
 python train_attention_fusion.py
 ```
 
 ## Hyperparameters
 
-| Hyperparameter           | Value        |
+| Hyperparameter | Value |
 |---------------------------|--------------|
-| Word Embedding Dim        | 100          |
-| Char Embedding Dim        | 24           |
-| Statistical Feature Dim   | 4            |
-| Projection Dim            | 128          |
-| Hidden Dim (Dense Layer)  | 64           |
-| Dropout Rate              | 0.2          |
-| Batch Size                | 32           |
-| Epochs                    | 100          |
-| Classes                   | 2 (Binary)   |
+| Word Embedding Dim | 100 |
+| Char Embedding Dim | 24 |
+| Statistical Feature Dim | 4
+| Projection Dim | 128
+| Hidden Dim (Dense Layer) | 64
+| Dropout Rate | 0.2 |
+| Batch Size | 32 |
+| Epochs | 100 |
+| Classes | 2 (Binary) |
 
 ## Example Output
-
 - Validation Accuracy is printed every 10 epochs.
-- Best epoch and corresponding validation accuracy are displayed.
-- Final Test Accuracy is also shown.
+- Best epoch and its relative validation accuracy are printed.
+- Final Test Accuracy is also printed.
 
 ```
 Epoch 91: Validation Accuracy = 0.9467
@@ -93,9 +91,9 @@ Attention-fusion-classifier/
 ├── output
 ├── README.md
 ├── train_attention_fusion.py
-└── requirements.txt 
+└── requirements.txt
 ```
-## Future Improvements
+## Future Enhancements
 - Add configurable hyperparameters via command-line arguments.
-- Visualization of attention weights.
-- Model checkpoint saving and loading.
+- Visualizing attention weights.
+- Saving and loading model checkpoints.
