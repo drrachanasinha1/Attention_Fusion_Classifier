@@ -63,34 +63,8 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 # Print model summary
 model.summary()
 
-# Generate synthetic data for demonstration
-num_samples = 1000
+data = pd.read_csv('/content/sampledata.csv')
 
-# Word embeddings: Class 0 has lower values, Class 1 has higher values
-word_data_class0 = np.random.rand(num_samples // 2, D_word) * 0.4  # Class 0
-word_data_class1 = np.random.rand(num_samples // 2, D_word) * 0.4 + 0.6  # Class 1
-word_data = np.vstack([word_data_class0, word_data_class1])
-
-# Character embeddings: Class 0 has lower values, Class 1 has higher values
-char_data_class0 = np.random.rand(num_samples // 2, D_char) * 0.4  # Class 0
-char_data_class1 = np.random.rand(num_samples // 2, D_char) * 0.4 + 0.6  # Class 1
-char_data = np.vstack([char_data_class0, char_data_class1])
-
-# Statistical features: Class 0 has lower values, Class 1 has higher values
-stat_data_class0 = np.random.rand(num_samples // 2, D_stats) * 0.4  # Class 0
-stat_data_class1 = np.random.rand(num_samples // 2, D_stats) * 0.4 + 0.6  # Class 1
-stat_data = np.vstack([stat_data_class0, stat_data_class1])
-
-# Labels: Class 0 (0) and Class 1 (1)
-labels = np.array([0] * (num_samples // 2) + [1] * (num_samples // 2))
-
-# Shuffle the data
-indices = np.arange(num_samples)
-np.random.shuffle(indices)
-word_data = word_data[indices]
-char_data = char_data[indices]
-stat_data = stat_data[indices]
-labels = labels[indices]
 
 # Split data into training and testing sets (70:30)
 X_word_train, X_word_test, X_char_train, X_char_test, X_stat_train, X_stat_test, y_train, y_test = train_test_split(
