@@ -1,41 +1,25 @@
-Model Summary:
+# Model Summary
 
-| Layer (type)         | Output Shape     | Param #  | Connected to          |
-|----------------------|------------------|----------|-----------------------|
-| word_embedding       | (None, 50)       | 0        | -                     |
-| (InputLayer)         |                  |          |                       |
-|----------------------|------------------|----------|-----------------------|
-| char_embedding       | (None, 30)       | 0        | -                     |
-| (InputLayer)         |                  |          |                       |
-|----------------------|------------------|----------|-----------------------|
-| stats_features       | (None, 10)       | 0        | -                     |
-| (InputLayer)         |                  |          |                       |
-|----------------------|------------------|----------|-----------------------|
-| dense_177 (Dense)    | (None, 128)      | 6,528    | word_embedding[0][0]  |
-|----------------------|------------------|----------|-----------------------|
-| dense_178 (Dense)    | (None, 128)      | 3,968    | char_embedding[0][0]  |
-|----------------------|------------------|----------|-----------------------|
-| dense_179 (Dense)    | (None, 128)      | 1,408    | stats_features[0][0]  |
-|----------------------|------------------|----------|-----------------------|
-| lambda_27 (Lambda)   | (None, 3, 128)   | 0        | dense_177[0][0],      |
-|                      |                  |          | dense_178[0][0],      |
-|                      |                  |          | dense_179[0][0]       |
-|----------------------|------------------|----------|-----------------------|
-| attention_fusion     | (None, 128)      | 0        | lambda_27[0][0]       |
-| (Lambda)             |                  |          |                       |
-|----------------------|------------------|----------|-----------------------|
-| dense_181 (Dense)    | (None, 64)       | 8,256    | attention_fusion[0][0]|
-|----------------------|------------------|----------|-----------------------|
-| dropout_27           | (None, 64)       | 0        | dense_181[0][0]       |
-| (Dropout)            |                  |          |                       |
-|----------------------|------------------|----------|-----------------------|
-| dense_182 (Dense)    | (None, 2)        | 130      | dropout_27[0][0]      |
-|----------------------|------------------|----------|-----------------------|
+| Layer (type)         | Output Shape      | Param #  | Connected to         |
+| :------------------- | :---------------- | :------- | :------------------- |
+| word_embedding        | (None, 100)        | 0        | -                     |
+| (InputLayer)          |                    |          |                       |
+| char_embedding        | (None, 24)         | 0        | -                     |
+| (InputLayer)          |                    |          |                       |
+| stats_features        | (None, 4)          | 0        | -                     |
+| (InputLayer)          |                    |          |                       |
+| dense_213 (Dense)      | (None, 128)        | 12,928   | word_embedding[0][0]  |
+| dense_214 (Dense)      | (None, 128)        | 3,200    | char_embedding[0][0]  |
+| dense_215 (Dense)      | (None, 128)        | 640      | stats_features[0][0]  |
+| lambda_33 (Lambda)     | (None, 3, 128)     | 0        | dense_213, dense_214, dense_215 |
+| attention_fusion (Lambda) | (None, 128)    | 0        | lambda_33[0][0]       |
+| dense_217 (Dense)      | (None, 64)         | 8,256    | attention_fusion[0][0]|
+| dropout_33 (Dropout)   | (None, 64)         | 0        | dense_217[0][0]       |
+| dense_218 (Dense)      | (None, 2)          | 130      | dropout_33[0][0]      |
 
-**Total params**: 20,290 (79.26 KB)  
-**Trainable params**: 20,290 (79.26 KB)  
+**Total params**: 25,154 (98.26 KB)  
+**Trainable params**: 25,154 (98.26 KB)  
 **Non-trainable params**: 0 (0.00 B)
-
 ---
 
 **Training Log:**
@@ -59,22 +43,37 @@ Model Summary:
 
 ---
 
-**Validation Accuracy Over Epochs:**
+# Validation Accuracy Over Epochs
 
-Epoch 1: Validation Accuracy = 0.8933  
-Epoch 2: Validation Accuracy = 1.0000  
-Epoch 3: Validation Accuracy = 1.0000  
-Epoch 4: Validation Accuracy = 1.0000  
-... *(continue recording epochs)*
+| Epoch  | Validation Accuracy |
+| :----- | :------------------ |
+| 1      | 0.9967               |
+| 11     | 1.0000               |
+| 21     | 1.0000               |
+| 31     | 1.0000               |
+| 41     | 1.0000               |
+| 51     | 1.0000               |
+| 61     | 1.0000               |
+| 71     | 1.0000               |
+| 81     | 1.0000               |
+| 91     | 1.0000               |
 
-Test Accuracy: 1.0000
+---
 
-Best Epoch: 2  
-Best Validation Accuracy: 1.0000
+# Test Accuracy
+- **Test Accuracy**: `1.0000`
 
-Hyperparameters:  
-Epochs = 100  
-Batch Size = 32  
-Projection Dim = 128  
-Hidden Dim = 64  
-Dropout = 0.2
+---
+
+# Best Performance
+- **Best Epoch**: `2`
+- **Best Validation Accuracy**: `1.0000`
+
+---
+
+# Hyperparameters
+- **Epochs**: `100`
+- **Batch Size**: `32`
+- **Projection Dim**: `128`
+- **Hidden Dim**: `64`
+- **Dropout**: `0.2`
