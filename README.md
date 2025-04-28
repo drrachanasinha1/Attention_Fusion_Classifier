@@ -8,7 +8,6 @@ It demonstrates how to integrate multiple input types and use an attention-based
 
 - Supports **three input modalities**: Word Embeddings, Character Embeddings, and Statistical Features.
 - **Attention Fusion Layer** to learn the importance of each modality dynamically.
-- **Synthetic dataset generation** for demonstration purposes.
 - **Validation tracking** and **best epoch selection**.
 - **Lightweight**, easy-to-train model.
 
@@ -97,6 +96,5 @@ Attention-fusion-classifier/
 ```
 ## Future Improvements
 - Add configurable hyperparameters via command-line arguments.
-- Support for real datasets (like text classification datasets).
 - Visualization of attention weights.
 - Model checkpoint saving and loading.
